@@ -67,6 +67,7 @@ const useOctokit = () => {
     async function onLoad() {
         await octokit.graphql.paginate(query)
         .then(res => {
+            setIsPending(true)
             return JSON.parse(JSON.stringify(res.organization.repositories.edges))
         })
         .then(repos => {

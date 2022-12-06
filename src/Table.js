@@ -1,13 +1,14 @@
 import { useTable, usePagination, useFilters, useSortBy } from "react-table";
+import UseCSV from "./UseCSV";
 
-export default function Table({ columns, data }) {
+export default function Table({ columns, data, csvheaders, filename }) {
     
   // Use the useTable Hook to send the columns and data to build the table
   const {
     getTableProps, // table props from react-table
     getTableBodyProps, // table body props from react-table
     headerGroups, // headerGroups, if your table has groupings
-    rows, // rows for the table based on the data passed
+    // rows, // rows for the table based on the data passed
     prepareRow, // Prepare the row (this function needs to be called for each row before getting the row props)
     page, // Instead of using 'rows', we'll use page,
     // which has only the rows for the active page
@@ -116,6 +117,7 @@ export default function Table({ columns, data }) {
             ))}
           </select>
         </div>
+        <UseCSV  data={data} headers={csvheaders} filename={filename} />
       </>
     )
   }

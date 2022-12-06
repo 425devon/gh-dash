@@ -17,7 +17,7 @@ const Home = ({columns, repos, branchProtected, unprotected, isPending, error })
             }
             { repos && 
                 <div className="blog-preview">
-                    <Link to={'/upProtected'}> There are { unprotected.length } unprotected repositories! </Link>
+                    <Link to={'/unProtected'}> There are { unprotected.length } unprotected repositories! </Link>
                 </div> 
             }
         </div>

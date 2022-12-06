@@ -1,35 +1,6 @@
-import { useMemo } from "react";
 import { useTable } from "react-table";
 
-export default function Table({ data }) {
-    const columns = useMemo(
-        () => [
-          {
-            // first group - TV Show
-            Header: "Repo",
-            // First group columns
-            columns: [
-              {
-                Header: "Name",
-                accessor: "node.name"
-              },
-              {
-                Header: "Branch Protection Rules",
-                accessor: "node.branchProtectionRules.totalCount"
-              },
-              {
-                Header: "Is Archived",
-                accessor: "node.isArchived"
-              },
-              {
-                Header: "Last updated",
-                accessor: "node.updatedAt"
-              }
-            ]
-          }
-        ],
-        []
-      );
+export default function Table({ columns, data }) {
     
   // Use the useTable Hook to send the columns and data to build the table
   const {
@@ -48,28 +19,30 @@ export default function Table({ data }) {
     - react-table doesn't have UI, it's headless. We just need to put the react-table props from the Hooks, and it will do its magic automatically
   */
   return (
-    <table {...getTableProps()}>
-      <thead>
-        {headerGroups.map(headerGroup => (
-          <tr {...headerGroup.getHeaderGroupProps()}>
-            {headerGroup.headers.map(column => (
-              <th {...column.getHeaderProps()}>{column.render("Header")}</th>
-            ))}
-          </tr>
-        ))}
-      </thead>
-      <tbody {...getTableBodyProps()}>
-        {rows.map((row, i) => {
-          prepareRow(row);
-          return (
-            <tr {...row.getRowProps()}>
-              {row.cells.map(cell => {
-                return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
-              })}
+    <div className="table">
+        <table {...getTableProps()}>
+        <thead>
+            {headerGroups.map(headerGroup => (
+            <tr {...headerGroup.getHeaderGroupProps()}>
+                {headerGroup.headers.map(column => (
+                <th {...column.getHeaderProps()}>{column.render("Header")}</th>
+                ))}
             </tr>
-          );
-        })}
-      </tbody>
-    </table>
+            ))}
+        </thead>
+        <tbody {...getTableBodyProps()}>
+            {rows.map((row, i) => {
+            prepareRow(row);
+            return (
+                <tr {...row.getRowProps()}>
+                {row.cells.map(cell => {
+                    return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
+                })}
+                </tr>
+            );
+            })}
+        </tbody>
+        </table>
+    </div>
   );
 }

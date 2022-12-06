@@ -12,7 +12,7 @@ function App() {
   const columns = useMemo(
     () => [
       {
-        Header: "Repo",
+        Header: "Repositories",
         columns: [
           {
             Header: "Name",

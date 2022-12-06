@@ -5,6 +5,15 @@
   font-family: "Quicksand";
   color: #333;
 }
+/* pagination */
+table, th, td {
+  border: 1px solid;
+}
+
+.pagination {
+  padding: 0.5rem;
+}
+/*  */
 .navbar {
   padding: 20px;
   display: flex;

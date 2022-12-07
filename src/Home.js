@@ -1,20 +1,25 @@
-import useOctokit from "./useOctokit";
+// import RepoList from "./repoList";
+// import useOctokit from "./useOctokit";
+import { Link } from "react-router-dom";
+// import Table from "./Table";
 
-const Home = () => {
-    const { repos, branchProtected, unprotected, isPending, error } = useOctokit();
+const Home = ({columns, repos, branchProtected, unprotected, isPending, error }) => {
     return (
         <div className="home">
             <h2>Welcome</h2>
             { isPending && <div> loading...</div>}
             { error && <div>error: { error }</div> }
             { repos && <div>Finished Scanning { repos.length } repositories!</div> }
-            { repos && <div>There are { branchProtected.length } branch protected repositories!</div> }
-            { repos && <div>There are { unprotected.length } unprotected repositories!</div> }
-            {/* {repos && repos.map(repo => (
-                <div className="blog-preview" key={repo.node.id}>
-                    <h2>{repo.node.name} is protected: {repo.node.branchProtectionRules.totalCount > 0 ? 'true' : 'false' }</h2>
-                </div>
-            ))} */}
+            { repos && 
+                <div className="blog-preview">
+                    <Link to={'/branchProtected'}> There are { branchProtected.length } branch protected repositories! </Link>
+                </div> 
+            }
+            { repos && 
+                <div className="blog-preview">
+                    <Link to={'/unProtected'}> There are { unprotected.length } unprotected repositories! </Link>
+                </div> 
+            }
         </div>
     );
 }

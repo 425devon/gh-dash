@@ -67,13 +67,15 @@ const useOctokit = () => {
     async function onLoad() {
         await octokit.graphql.paginate(query)
         .then(res => {
+            setIsPending(true)
             return JSON.parse(JSON.stringify(res.organization.repositories.edges))
         })
         .then(repos => {
-            setRepos(repos)
+            const unArchived = repos.filter(repo => !repo.node.isArchived)
+            setRepos(unArchived);
             setIsPending(false);
 
-            repos.forEach(repo => {
+            unArchived.forEach(repo => {
             repo.node.branchProtectionRules.totalCount > 0 ? setBranchProtected(branchProtected => [...branchProtected, repo]) : setUnprotected(unprotected => [...unprotected, repo])
             });
             console.log(`Total branches: ${repos.length} `);

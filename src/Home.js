@@ -1,7 +1,4 @@
-// import RepoList from "./repoList";
-// import useOctokit from "./useOctokit";
 import { Link } from "react-router-dom";
-// import Table from "./Table";
 
 const Home = ({columns, repos, branchProtected, unprotected, isPending, error }) => {
     return (
